@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Basic Patient Search</title>
+  <link rel="stylesheet" href="assets/css/app.css">
+  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://builds.emberjs.com/release/ember-template-compiler.js"></script>
+  <script src="http://builds.emberjs.com/release/ember.js"></script>
+  
+  <script src="assets/js/main.js"></script>
+</head>
+<body>
+
+  <script type="text/x-handlebars">
+    <h2> Patient Search Application</h2>
+    {{outlet}}
+  </script>
+
+  
+  <script type="text/x-handlebars" data-template-name="index"> 
+    {{input value=searchText placeholder="search here..." key-press="doSearch"}}
+    
+    <hr />
+    
+    {{#if searchText}}
+        
+        {{#each results as |patient|}}
+        
+            <div>        
+                <h2>{{patient.name}}</h2>
+                {{#each patient.documents as |document|}}
+                    <div>
+                        <h3>{{document.title}}</h3>
+                        <div>{{document.date}}</div>
+                        <pre>{{document.contents}}</pre>
+                    </div>
+                {{/each}}
+            </div>
+            
+        {{else}}
+
+            <div class="message">
+                Sorry, No search results for {{searchText}}
+            </div>
+            
+        {{/each}}
+        
+    {{else}}
+        <div class="message">
+            Please enter a search above.
+        </div>
+    {{/if}}
+
+  </script>
+
+</body>
+</html>
